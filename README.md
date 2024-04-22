@@ -8,12 +8,12 @@ Use:
 5. Network
 
 <div style="display: flex;">
-    <img src="screenimage/1screen.png" width="220" height="450">
-    <img src="screenimage/2screen.png" width="220" height="450">
-    <img src="screenimage/3screen.png" width="220" height="450">
+    <img src="screenImage/1screen.png" width="200" height="450">
+    <img src="screenImage/2screen.png" width="220" height="450">
+    <img src="screenImage/3screen.png" width="220" height="450">
 </div>
 
 <div style="display: flex;">
-    <img src="screenimage/4screen.png" width="220" height="450">
-    <img src="screenimage/5screen.png" width="220" height="450">
+    <img src="screenImage/4screen.png" width="220" height="450">
+    <img src="screenImage/5screen.png" width="220" height="450">
 </div>
