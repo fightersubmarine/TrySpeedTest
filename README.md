@@ -6,6 +6,7 @@ Use:
 3. CoreData
 4. Combine
 5. Network
+6. Alamofire
 
 <div style="display: flex;">
     <img src="screenImage/1screen.png" width="200" height="450">
