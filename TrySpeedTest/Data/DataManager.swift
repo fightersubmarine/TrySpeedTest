@@ -66,6 +66,7 @@ final class DataManager: ObservableObject {
     
     /// - Returns: The first SettingsModel object, if exists.
     func loadItems() -> SettingsModel? {
+        print("load data")
         let fetchRequest: NSFetchRequest<SettingsModel> = SettingsModel.fetchRequest()
         do {
             let settings = try context.fetch(fetchRequest)

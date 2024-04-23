@@ -47,6 +47,7 @@ struct SettingsView: View {
     // MARK: - Properties
     
     @EnvironmentObject var settingsViewModel: SettingsViewModel
+    @Environment(\.scenePhase) var scenePhase
     @FocusState private var isTextFieldFocused: Bool
     @State private var isURLValid = true
     @State private var showingAlert = false
@@ -139,6 +140,15 @@ struct SettingsView: View {
         .alert(isPresented: $showingAlert) {
             // Вызываем окно с предупреждением если не прошли валидацию
             Alert(title: Text("\(SettingsViewString.error)"), message: Text("\(SettingsViewString.invalidURL)"), dismissButton: .default(Text("\(SettingsViewString.ok)")))
+        }
+        .onChange(of: scenePhase) {
+            // Вызываем метод сохранения если пользователь перезапускает приложение оставаясь на экране настроек
+            newPhase in
+            if newPhase == .background {
+                if isURLValid {
+                    settingsViewModel.saveSettingsIfNeeded()
+                } else { return }
+            }
         }
     }
 
