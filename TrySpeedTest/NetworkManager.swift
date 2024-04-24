@@ -77,6 +77,8 @@ final class NetworkManager {
                             mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "\(measuredSpeedRounded)", uploadSpeed: "zero")
                         } else if self.measureUploadSpeed {
                             mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "zero", uploadSpeed: "\(uploadSpeedRounded)")
+                        } else {
+                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "zero", uploadSpeed: "zero")
                         }
                         completion(.success(mainScreenModel))
                     case .failure(let error):
