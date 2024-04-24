@@ -12,9 +12,11 @@ import SwiftUI
 struct MainScreenString {
     static let initialInstantSpeed: String = "0"
     static let initialMeasuredSpeed: String = "0"
+    static let initialUploadSpeed: String = "0"
     static let topTitle: String = "Speed Test"
     static let instantSpeedTitle: String = "Instantaneous Speed"
-    static let measuredSpeedTitle: String = "Measured Speed"
+    static let measuredSpeedTitle: String = "Download Speed"
+    static let uploadSpeedTitle: String = "Upload Speed"
     static let startButtonTitle: String = "Start"
 }
 
@@ -73,6 +75,17 @@ struct MainScreenView: View {
                 VStack {
                     Text("\(MainScreenString.measuredSpeedTitle)")
                     Text("\(viewModel.measuredSpeed) Mbps")
+                        .font(.largeTitle)
+                        .fontWeight(.bold)
+                }
+                .foregroundColor(Color("labelTextColorSet"))
+                .offset(y: .secondOffset)
+                
+                Spacer().frame(height: .firstOffset)
+                
+                VStack {
+                    Text("\(MainScreenString.uploadSpeedTitle)")
+                    Text("\(viewModel.uploadSpeed) Mbps")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                 }

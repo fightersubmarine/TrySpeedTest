@@ -72,15 +72,22 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func saveSettingsIfNeeded() {
-        guard let existingSettings = fetchSettingsModel(),
-              testURL != existingSettings.taskURL ||
-              selectedTheme.rawValue != existingSettings.selectedTheme ||
-              measureDownloadSpeed != existingSettings.instantSpeed ||
-              measureUploadSpeed != existingSettings.measuredSpeed else {
+        // Получаем существующие настройки
+        guard let existingSettings = fetchSettingsModel() else {
+            // Если данных нет, сохраняем текущие настройки
+            saveSettings()
             return
         }
         
-        saveSettings()
+        // Проверяем, отличаются ли текущие настройки от существующих
+        if testURL != existingSettings.taskURL ||
+           selectedTheme.rawValue != existingSettings.selectedTheme ||
+           measureDownloadSpeed != existingSettings.instantSpeed ||
+           measureUploadSpeed != existingSettings.measuredSpeed {
+            
+            // Если настройки отличаются, сохраняем их
+            saveSettings()
+        }
     }
     
     private func saveSettings() {

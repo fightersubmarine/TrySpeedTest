@@ -56,25 +56,28 @@ final class NetworkManager {
         
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied {
+                let startTime = DispatchTime.now()
                 AF.request(self.testURL).responseData { response in
                     switch response.result {
                     case .success(let data):
                         var mainScreenModel: MainScreenModel? = nil
+                        let endTime = DispatchTime.now()
+                        let nanoTime = endTime.uptimeNanoseconds - startTime.uptimeNanoseconds
+                        let timeInterval = Double(nanoTime) / 1_000_000_000 // Duration in seconds
+                        
+                        let speed = Double(data.count)
+                        let downloadSpeed = Double(data.count) / Double(response.metrics?.taskInterval.duration ?? 1) / 1024.0 / 1024.0
+                        let measuredSpeedRounded = String(format: "%.2f", downloadSpeed)
+                        let uploadSpeed = speed / timeInterval / 1024.0 / 1024.0 // MBps
+                        let uploadSpeedRounded = String(format: "%.2f", uploadSpeed)
                         
                         if self.measureDownloadSpeed && self.measureUploadSpeed {
-                            let speed = Double(data.count)
-                            let secondSpeed = Double(data.count) / Double(response.metrics?.taskInterval.duration ?? 1) / 1024.0 / 1024.0
-                            let speedRounded = String(format: "%.2f", secondSpeed)
-                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "\(speedRounded)")
-                        } else if self.measureUploadSpeed {
-                            let secondSpeed = Double(data.count) / Double(response.metrics?.taskInterval.duration ?? 1) / 1024.0 / 1024.0
-                            let speedRounded = String(format: "%.2f", secondSpeed)
-                            mainScreenModel = MainScreenModel(instantaneousSpeed: "zero", measuredSpeed: "\(speedRounded)")
+                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "\(measuredSpeedRounded)", uploadSpeed: "\(uploadSpeedRounded)")
                         } else if self.measureDownloadSpeed {
-                            let speed = Double(data.count)
-                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "zero")
+                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "\(measuredSpeedRounded)", uploadSpeed: "zero")
+                        } else if self.measureUploadSpeed {
+                            mainScreenModel = MainScreenModel(instantaneousSpeed: "\(speed)", measuredSpeed: "zero", uploadSpeed: "\(uploadSpeedRounded)")
                         }
-                        
                         completion(.success(mainScreenModel))
                     case .failure(let error):
                         completion(.failure(error))

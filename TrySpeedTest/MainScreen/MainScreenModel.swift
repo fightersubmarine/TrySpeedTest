@@ -10,4 +10,5 @@ import Foundation
 struct MainScreenModel: Codable {
     var instantaneousSpeed: String
     var measuredSpeed: String
+    var uploadSpeed: String
 }

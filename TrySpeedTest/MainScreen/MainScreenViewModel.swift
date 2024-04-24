@@ -13,6 +13,7 @@ final class MainScreenViewModel: ObservableObject {
 
     @Published var instantSpeed: String = MainScreenString.initialInstantSpeed
     @Published var measuredSpeed: String = MainScreenString.initialMeasuredSpeed
+    @Published var uploadSpeed: String = MainScreenString.initialUploadSpeed
     @Published var isTesting: Bool = false
     
     func startSpeedTest() {
@@ -27,6 +28,7 @@ final class MainScreenViewModel: ObservableObject {
                     // Обновляем данные с учетом полученных результатов
                     self.instantSpeed = speedResult?.instantaneousSpeed ?? "zero"
                     self.measuredSpeed = speedResult?.measuredSpeed ?? "zero"
+                    self.uploadSpeed = speedResult?.uploadSpeed ?? "zero"
                 case .failure(let error):
                     // Обрабатываем ошибку 
                     print("Failed to fetch speed test data: \(error)")
