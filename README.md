@@ -9,12 +9,13 @@ Use:
 6. Alamofire
 
 <div style="display: flex;">
-    <img src="screenImage/1screen.png" width="200" height="450">
-    <img src="screenImage/2screen.png" width="220" height="450">
-    <img src="screenImage/3screen.png" width="220" height="450">
+    <img src="screenImage/1screen.png" width="220" height="460">
+    <img src="screenImage/2screen.png" width="220" height="460">
+    <img src="screenImage/3screen.png" width="220" height="460">
 </div>
 
 <div style="display: flex;">
-    <img src="screenImage/4screen.png" width="220" height="450">
-    <img src="screenImage/5screen.png" width="220" height="450">
+    <img src="screenImage/4screen.png" width="220" height="460">
+    <img src="screenImage/5screen.png" width="220" height="460">
+    <img src="screenImage/6screen.png" width="220" height="460">
 </div>
